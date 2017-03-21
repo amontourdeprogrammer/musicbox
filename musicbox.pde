@@ -4,6 +4,7 @@ boolean stop = false;
 boolean move = false;
 
 //Partie musique
+
 import processing.sound.*;
 
 // Oscillator and envelope 
@@ -105,11 +106,12 @@ void draw() {
    //Musique
     // If value of trigger is equal to the computer clock and if not all 
     // notes have been played yet, the next note gets triggered.
+    if (stop == false){
   if ((millis() > trigger) && (note<midiSequence.length)) {
 
     // midiToFreq transforms the MIDI value into a frequency in Hz which we use 
     //to control the triangle oscillator with an amplitute of 0.8
-    triOsc.play(midiToFreq(midiSequence[note]), t); //augmente l'amplitude à chaque keypressed mais on peut remmettre 0.8 
+    triOsc.play(midiToFreq(midiSequence[note]), 0.8); //augmente l'amplitude à chaque keypressed mais on peut remmettre 0.8 
     
 
     // The envelope gets triggered with the oscillator as input and the times and 
@@ -130,14 +132,18 @@ void draw() {
     if (move == true) {
      t = t + 10;
      note = 0;//pour remettre la loop à 0 mais ça marche pas!!
-    }
+      
+  }
   }
 } 
+}
 
 // This function calculates the respective frequency of a MIDI note
 float midiToFreq(int note) {
   return (pow(2, ((note-69)/12.0)))*440;
 }
+
+
 //KEYBOARD
 void keyPressed() {
    
@@ -146,8 +152,8 @@ void keyPressed() {
     }
   
     
-  if ((keyCode == RIGHT)) {
-    move = true;
+  if (keyCode == RIGHT) {
+      move = true;
   }
   
 
