@@ -106,8 +106,8 @@ void draw() {
    //Musique
     // If value of trigger is equal to the computer clock and if not all 
     // notes have been played yet, the next note gets triggered.
-    if (stop == false){
-  if ((millis() > trigger) && (note<midiSequence.length)) {
+    if (stop == false) {
+      if ((millis() > trigger) && (note<midiSequence.length)) {
 
     // midiToFreq transforms the MIDI value into a frequency in Hz which we use 
     //to control the triangle oscillator with an amplitute of 0.8
@@ -148,7 +148,7 @@ float midiToFreq(int note) {
 void keyPressed() {
    
     if (key == ' ') {
-      stop = true;
+      stop = !stop;
     }
   
     
