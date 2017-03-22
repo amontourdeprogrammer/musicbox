@@ -125,10 +125,6 @@ void draw() {
       note = 0;
     }
     
-    if (move == true) {
-     t = t + 10;
-     /*note = 0;//pour remettre la loop à 0 mais ça marche pas!!*/
-   }
   }
  } 
 }
@@ -144,9 +140,5 @@ void keyPressed() {
   if (key == ' ') {
       stop = !stop;
     }
-   
-  if (keyCode == RIGHT) {
-      move = true;
-  }
   
 }
