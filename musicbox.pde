@@ -1,14 +1,11 @@
+import processing.sound.*;
+
 //PARAMETRES
 // keyboard
 boolean stop = false;
-boolean move = false;
 int red;
 int blue;
 int green;
-
-
-import processing.sound.*;
-
 // Oscillator and envelope 
 TriOsc triOsc;
 Env env; 
@@ -20,9 +17,7 @@ float sustainLevel = 0.2;
 float releaseTime = 0.2;
 
 // This is an octave in MIDI notes.
-int[] midiSequence = { 
-  73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85
-}; 
+int[] midiSequence = {73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83};
 
 // Duration between the notes
 int duration = 200;
@@ -31,7 +26,6 @@ int trigger = 0;
 
 // An index to count up the notes
 int note = 0; 
-
 
 //Visuel
 
@@ -68,7 +62,6 @@ float y4(float t2) {
   return sin(t2 / 20) * 200;
 }
 
-
 void setup() {
   size(640, 360);
   background(255);
@@ -99,38 +92,9 @@ void draw() {
     t+=0.5;
     t2+=0.3;
  }
-    
-    
-   //Music
-    // If value of trigger is equal to the computer clock and if not all 
-    // notes have been played yet, the next note gets triggered.
-    if (stop == false) {
-      if ((millis() > trigger) && (note<midiSequence.length)) {
-        
-
-    // midiToFreq transforms the MIDI value into a frequency in Hz which we use 
-    //to control the triangle oscillator with an amplitute of 0.8
-       //triOsc.play(midiToFreq(midiSequence[note]), 0.8); //augmente l'amplitude à chaque keypressed mais on peut remmettre 0.8 
-    
-
-    // The envelope gets triggered with the oscillator as input and the times and 
-    // levels we defined earlier
-      env.play(triOsc, attackTime, sustainTime, sustainLevel, releaseTime);
-
-    // Create the new trigger according to predefined durations and speed
-      trigger = millis() + duration;
-
-    // Advance by one note in the midiSequence;
-      note++; 
-
-    // Loop the sequence
-    if (note == 12) {
-      note = 0;
-    }
-    
-  }
- } 
+    env.play(triOsc, attackTime, sustainTime, sustainLevel, releaseTime);
 }
+
 
 // This function calculates the respective frequency of a MIDI note
 float midiToFreq(int note) {
@@ -140,42 +104,47 @@ float midiToFreq(int note) {
 
 //KEYBOARD
 void keyPressed() {
-  switch (key) {
-    case ' ':
+  if(key == ' '){
       stop = !stop;
-    break;
-    case '1':
-      triOsc.play(0.5, 1.0);
-    break;
-    case '2':
-      triOsc.play(0.5, 1.0);
-    break;
-    case '3':
-      triOsc.play(0.5, 1.0);
-    break;
-    case '4':
-      triOsc.play(0.5, 1.0);
-    break;
-    case '5':
-      triOsc.play(0.5, 1.0);
-    break;
-    case '6':
-      triOsc.play(2.0, 1.0);
-    break;
-    case '7':
-      triOsc.play(2.0, 1.0);
-    break;
-    case '8':
-      triOsc.play(2.0, 1.0);
-    break;
-    case '9':
-      triOsc.play(2.0, 1.0);
-    break;
+  }
+  if(stop == false)
+  {
+  switch (key) {
     case '0':
-      triOsc.play(2.0, 1.0);
-    break;
+      triOsc.play(midiToFreq(midiSequence[0]), 0.8);
+      break;
+    case '1':
+      triOsc.play(midiToFreq(midiSequence[1]), 0.8);
+      break;
+    case '2':
+      triOsc.play(midiToFreq(midiSequence[2]), 0.8);
+      break;
+    case '3':
+      triOsc.play(midiToFreq(midiSequence[3]), 0.8);
+      break;
+    case '4':
+      triOsc.play(midiToFreq(midiSequence[4]), 0.8);
+      break;
+    case '5':
+      triOsc.play(midiToFreq(midiSequence[5]), 0.8);
+      break;
+    case '6':
+      triOsc.play(midiToFreq(midiSequence[6]), 0.8);
+      break;
+    case '7':
+      triOsc.play(midiToFreq(midiSequence[7]), 0.8);
+      break;
+    case '8':
+      triOsc.play(midiToFreq(midiSequence[8]), 0.8);
+      break;
+    case '9':
+      triOsc.play(midiToFreq(midiSequence[9]), 0.8);
+      break;
+    default:
+      red=int(random(255));
+      green=int(random(255));
+      blue=int(random(255));
+      break;
   }
-  red=int(random(255));
-  green=int(random(255));
-  blue=int(random(255));
   }
+ }
