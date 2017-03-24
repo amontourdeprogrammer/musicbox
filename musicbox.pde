@@ -2,6 +2,9 @@
 // keyboard
 boolean stop = false;
 boolean move = false;
+int red;
+int blue;
+int green;
 
 
 import processing.sound.*;
@@ -18,7 +21,7 @@ float releaseTime = 0.2;
 
 // This is an octave in MIDI notes.
 int[] midiSequence = { 
-  60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72
+  73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85
 }; 
 
 // Duration between the notes
@@ -75,20 +78,20 @@ void setup() {
 }
 
 void draw() { 
-  background(20);
+  background(red, green, blue);
   stroke(255);
   noFill();
   
   translate(width/2, height/2);
   
   for (int i = 0; i < NUM_LINES; i++) {
-    stroke(random(200),random(200),random(200));
+    stroke(255);
     strokeWeight(3);
     ellipse(x1(t + i ), y1(t + i), x2(t + i), y2(t + i)); 
  }
    
   for (int i = 0; i < NUM_LINES2; i++) {
-    stroke(random(200), random(200), random(200));
+    stroke(160, 160, 160);
     strokeWeight(2);
     ellipse(x3(t2 + i + 100), y3(t2 + i), x4(t2 + i + 100), y4(t2 + i)); 
  }
@@ -107,7 +110,7 @@ void draw() {
 
     // midiToFreq transforms the MIDI value into a frequency in Hz which we use 
     //to control the triangle oscillator with an amplitute of 0.8
-       triOsc.play(midiToFreq(midiSequence[note]), 0.8); //augmente l'amplitude à chaque keypressed mais on peut remmettre 0.8 
+       //triOsc.play(midiToFreq(midiSequence[note]), 0.8); //augmente l'amplitude à chaque keypressed mais on peut remmettre 0.8 
     
 
     // The envelope gets triggered with the oscillator as input and the times and 
@@ -137,8 +140,42 @@ float midiToFreq(int note) {
 
 //KEYBOARD
 void keyPressed() {
-  if (key == ' ') {
+  switch (key) {
+    case ' ':
       stop = !stop;
-    }
-  
-}
+    break;
+    case '1':
+      triOsc.play(0.5, 1.0);
+    break;
+    case '2':
+      triOsc.play(0.5, 1.0);
+    break;
+    case '3':
+      triOsc.play(0.5, 1.0);
+    break;
+    case '4':
+      triOsc.play(0.5, 1.0);
+    break;
+    case '5':
+      triOsc.play(0.5, 1.0);
+    break;
+    case '6':
+      triOsc.play(2.0, 1.0);
+    break;
+    case '7':
+      triOsc.play(2.0, 1.0);
+    break;
+    case '8':
+      triOsc.play(2.0, 1.0);
+    break;
+    case '9':
+      triOsc.play(2.0, 1.0);
+    break;
+    case '0':
+      triOsc.play(2.0, 1.0);
+    break;
+  }
+  red=int(random(255));
+  green=int(random(255));
+  blue=int(random(255));
+  }
